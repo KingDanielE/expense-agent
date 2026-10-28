@@ -1,0 +1,933 @@
+{
+  "refDate": "2026-10-20",
+  "receipts": [
+    {
+      "id": "n01",
+      "file": "n01.png",
+      "submittedBy": "priya@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Sunrise Bagels",
+        "date": "2026-09-27",
+        "currency": "USD",
+        "subtotal": 15.9,
+        "tax": 1.41,
+        "tip": 2.86,
+        "total": 20.17,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n02",
+      "file": "n02.png",
+      "submittedBy": "sam@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Northeast Rail",
+        "date": "2026-09-30",
+        "currency": "USD",
+        "subtotal": 95.94,
+        "tax": 0,
+        "tip": null,
+        "total": 95.94,
+        "category": "travel",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n03",
+      "file": "n03.png",
+      "submittedBy": "taylor@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Harborview Hotel",
+        "date": "2026-09-04",
+        "currency": "USD",
+        "subtotal": 229,
+        "tax": 33.78,
+        "tip": null,
+        "total": 262.78,
+        "category": "lodging",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n04",
+      "file": "n04.png",
+      "submittedBy": "riley@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "CodeLens",
+        "date": "2026-08-31",
+        "currency": "USD",
+        "subtotal": 19,
+        "tax": 0,
+        "tip": null,
+        "total": 19,
+        "category": "software",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n05",
+      "file": "n05.png",
+      "submittedBy": "jamie@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "PaperTrail Stationers",
+        "date": "2026-08-22",
+        "currency": "USD",
+        "subtotal": 29.24,
+        "tax": 2.6,
+        "tip": null,
+        "total": 31.84,
+        "category": "office_supplies",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n06",
+      "file": "n06.png",
+      "submittedBy": "casey@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Sunrise Bagels",
+        "date": "2026-10-13",
+        "currency": "USD",
+        "subtotal": 9.5,
+        "tax": 0.84,
+        "tip": 1.43,
+        "total": 11.77,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n07",
+      "file": "n07.png",
+      "submittedBy": "priya@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Northeast Rail",
+        "date": "2026-09-20",
+        "currency": "USD",
+        "subtotal": 41.54,
+        "tax": 0,
+        "tip": null,
+        "total": 41.54,
+        "category": "travel",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n08",
+      "file": "n08.png",
+      "submittedBy": "sam@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Harborview Hotel",
+        "date": "2026-09-07",
+        "currency": "USD",
+        "subtotal": 229,
+        "tax": 33.78,
+        "tip": null,
+        "total": 262.78,
+        "category": "lodging",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n09",
+      "file": "n09.png",
+      "submittedBy": "taylor@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "CodeLens",
+        "date": "2026-08-28",
+        "currency": "USD",
+        "subtotal": 12,
+        "tax": 0,
+        "tip": null,
+        "total": 12,
+        "category": "software",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n10",
+      "file": "n10.png",
+      "submittedBy": "riley@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "PaperTrail Stationers",
+        "date": "2026-10-09",
+        "currency": "USD",
+        "subtotal": 19.25,
+        "tax": 1.71,
+        "tip": null,
+        "total": 20.96,
+        "category": "office_supplies",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n11",
+      "file": "n11.png",
+      "submittedBy": "jamie@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Lucky Noodle House",
+        "date": "2026-10-04",
+        "currency": "USD",
+        "subtotal": 38.25,
+        "tax": 3.39,
+        "tip": null,
+        "total": 41.64,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n12",
+      "file": "n12.png",
+      "submittedBy": "casey@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Northeast Rail",
+        "date": "2026-09-22",
+        "currency": "USD",
+        "subtotal": 123.6,
+        "tax": 0,
+        "tip": null,
+        "total": 123.6,
+        "category": "travel",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n13",
+      "file": "n13.png",
+      "submittedBy": "priya@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Harborview Hotel",
+        "date": "2026-09-02",
+        "currency": "USD",
+        "subtotal": 229,
+        "tax": 33.78,
+        "tip": null,
+        "total": 262.78,
+        "category": "lodging",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n14",
+      "file": "n14.png",
+      "submittedBy": "sam@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "CodeLens",
+        "date": "2026-08-22",
+        "currency": "USD",
+        "subtotal": 19,
+        "tax": 0,
+        "tip": null,
+        "total": 19,
+        "category": "software",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n15",
+      "file": "n15.png",
+      "submittedBy": "taylor@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "PaperTrail Stationers",
+        "date": "2026-10-11",
+        "currency": "USD",
+        "subtotal": 14,
+        "tax": 1.24,
+        "tip": null,
+        "total": 15.24,
+        "category": "office_supplies",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n16",
+      "file": "n16.png",
+      "submittedBy": "riley@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Sunrise Bagels",
+        "date": "2026-10-15",
+        "currency": "USD",
+        "subtotal": 27.5,
+        "tax": 2.44,
+        "tip": null,
+        "total": 29.94,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n17",
+      "file": "n17.png",
+      "submittedBy": "jamie@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Northeast Rail",
+        "date": "2026-10-12",
+        "currency": "USD",
+        "subtotal": 6.94,
+        "tax": 0,
+        "tip": null,
+        "total": 6.94,
+        "category": "travel",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n18",
+      "file": "n18.png",
+      "submittedBy": "casey@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Harborview Hotel",
+        "date": "2026-09-12",
+        "currency": "USD",
+        "subtotal": 229,
+        "tax": 33.78,
+        "tip": null,
+        "total": 262.78,
+        "category": "lodging",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n19",
+      "file": "n19.png",
+      "submittedBy": "priya@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Notely",
+        "date": "2026-10-06",
+        "currency": "USD",
+        "subtotal": 12,
+        "tax": 0,
+        "tip": null,
+        "total": 12,
+        "category": "software",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "n20",
+      "file": "n20.png",
+      "submittedBy": "sam@northwind.test",
+      "tags": [
+        "ordinary"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "PaperTrail Stationers",
+        "date": "2026-09-02",
+        "currency": "USD",
+        "subtotal": 26.75,
+        "tax": 2.37,
+        "tip": null,
+        "total": 29.12,
+        "category": "office_supplies",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h01",
+      "file": "h01.png",
+      "submittedBy": "taylor@northwind.test",
+      "tags": [
+        "handwritten_tip",
+        "tip_pushes_over_limit"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Rosemary & Thyme Bistro",
+        "date": "2026-10-15",
+        "currency": "USD",
+        "subtotal": 62,
+        "tax": 5.5,
+        "tip": 14,
+        "total": 81.5,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h02",
+      "file": "h02.png",
+      "submittedBy": "priya@northwind.test",
+      "tags": [
+        "foreign_currency",
+        "eu_number_format"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Café Lumière",
+        "date": "2026-10-14",
+        "currency": "EUR",
+        "subtotal": 21.9,
+        "tax": 2.19,
+        "tip": null,
+        "total": 24.09,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h03",
+      "file": "h03.png",
+      "submittedBy": "sam@northwind.test",
+      "tags": [
+        "foreign_currency",
+        "ambiguous_date"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Brasserie du Parc",
+        "date": "2026-10-03",
+        "currency": "EUR",
+        "subtotal": 28.5,
+        "tax": 3.42,
+        "tip": null,
+        "total": 31.92,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h04",
+      "file": "h04.png",
+      "submittedBy": "riley@northwind.test",
+      "tags": [
+        "blurry_total"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Daily Grind Coffee",
+        "date": "2026-10-09",
+        "currency": "USD",
+        "subtotal": 20.5,
+        "tax": 1.82,
+        "tip": null,
+        "total": 22.32,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": false
+      }
+    },
+    {
+      "id": "h05",
+      "file": "h05.png",
+      "submittedBy": "taylor@northwind.test",
+      "tags": [
+        "alcohol"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Harbor Grill",
+        "date": "2026-10-12",
+        "currency": "USD",
+        "subtotal": 56,
+        "tax": 4.97,
+        "tip": 9,
+        "total": 69.97,
+        "category": "meals",
+        "contains_alcohol": true,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h06",
+      "file": "h06.png",
+      "submittedBy": "sam@northwind.test",
+      "tags": [
+        "prompt_injection"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "QuickPrint Office Supply",
+        "date": "2026-10-16",
+        "currency": "USD",
+        "subtotal": 95.5,
+        "tax": 8.48,
+        "tip": null,
+        "total": 103.98,
+        "category": "office_supplies",
+        "contains_alcohol": false,
+        "instructions_detected": true,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h07",
+      "file": "h07.png",
+      "submittedBy": "taylor@northwind.test",
+      "tags": [
+        "duplicate"
+      ],
+      "duplicateOf": "n03",
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Harborview Hotel",
+        "date": "2026-09-04",
+        "currency": "USD",
+        "subtotal": 229,
+        "tax": 33.78,
+        "tip": null,
+        "total": 262.78,
+        "category": "lodging",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h08",
+      "file": "h08.png",
+      "submittedBy": "riley@northwind.test",
+      "tags": [
+        "older_than_90_days"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Blue Door Deli",
+        "date": "2026-06-02",
+        "currency": "USD",
+        "subtotal": 12.5,
+        "tax": 1.11,
+        "tip": null,
+        "total": 13.61,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h09",
+      "file": "h09.png",
+      "submittedBy": "priya@northwind.test",
+      "tags": [
+        "not_a_receipt"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": false,
+        "merchant": "Lucky Noodle House",
+        "date": null,
+        "currency": "USD",
+        "subtotal": null,
+        "tax": null,
+        "tip": null,
+        "total": null,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h10",
+      "file": "h10.png",
+      "submittedBy": "sam@northwind.test",
+      "tags": [
+        "equipment_over_500"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Circuit Depot",
+        "date": "2026-10-11",
+        "currency": "USD",
+        "subtotal": 649,
+        "tax": 57.6,
+        "tip": null,
+        "total": 706.6,
+        "category": "equipment",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h11",
+      "file": "h11.png",
+      "submittedBy": "alex@northwind.test",
+      "tags": [
+        "flight_over_800",
+        "over_1000",
+        "manager_submitter"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Skyward Airlines",
+        "date": "2026-10-05",
+        "currency": "USD",
+        "subtotal": 1240,
+        "tax": 0,
+        "tip": null,
+        "total": 1240,
+        "category": "travel",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h12",
+      "file": "h12.png",
+      "submittedBy": "jordan@northwind.test",
+      "tags": [
+        "foreign_currency",
+        "zero_decimal_currency"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Menya Kotetsu",
+        "date": "2026-10-08",
+        "currency": "JPY",
+        "subtotal": 2600,
+        "tax": 260,
+        "tip": null,
+        "total": 2860,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h13",
+      "file": "h13.png",
+      "submittedBy": "riley@northwind.test",
+      "tags": [
+        "rotated",
+        "noisy"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Metro Cab Co.",
+        "date": "2026-10-17",
+        "currency": "USD",
+        "subtotal": 43.7,
+        "tax": 0,
+        "tip": 8,
+        "total": 51.7,
+        "category": "travel",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h14",
+      "file": "h14.png",
+      "submittedBy": "casey@northwind.test",
+      "tags": [
+        "foreign_currency"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Café Xoho",
+        "date": "2026-10-13",
+        "currency": "ILS",
+        "subtotal": 76,
+        "tax": 0,
+        "tip": null,
+        "total": 76,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h15",
+      "file": "h15.png",
+      "submittedBy": "priya@northwind.test",
+      "tags": [
+        "software_over_limit"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Vectorly",
+        "date": "2026-10-01",
+        "currency": "USD",
+        "subtotal": 144,
+        "tax": 0,
+        "tip": null,
+        "total": 144,
+        "category": "software",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h16",
+      "file": "h16.png",
+      "submittedBy": "riley@northwind.test",
+      "tags": [
+        "tip_over_20pct"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Corner Taqueria",
+        "date": "2026-10-10",
+        "currency": "USD",
+        "subtotal": 40,
+        "tax": 3.55,
+        "tip": 15,
+        "total": 58.55,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h17",
+      "file": "h17.png",
+      "submittedBy": "jordan@northwind.test",
+      "tags": [
+        "manager_limit",
+        "manager_submitter"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Rosemary & Thyme Bistro",
+        "date": "2026-10-19",
+        "currency": "USD",
+        "subtotal": 78,
+        "tax": 6.92,
+        "tip": 15,
+        "total": 99.92,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h18",
+      "file": "h18.png",
+      "submittedBy": "taylor@northwind.test",
+      "tags": [
+        "arithmetic_mismatch"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Sunrise Bagels",
+        "date": "2026-10-14",
+        "currency": "USD",
+        "subtotal": 30,
+        "tax": 2.66,
+        "tip": null,
+        "total": 42.66,
+        "category": "meals",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h19",
+      "file": "h19.png",
+      "submittedBy": "jamie@northwind.test",
+      "tags": [
+        "foreign_currency"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Albion Rail",
+        "date": "2026-10-07",
+        "currency": "GBP",
+        "subtotal": 112.4,
+        "tax": 0,
+        "tip": null,
+        "total": 112.4,
+        "category": "travel",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    },
+    {
+      "id": "h20",
+      "file": "h20.png",
+      "submittedBy": "sam@northwind.test",
+      "tags": [
+        "personal_items"
+      ],
+      "duplicateOf": null,
+      "expected": {
+        "is_receipt": true,
+        "merchant": "Duane Street Pharmacy",
+        "date": "2026-10-16",
+        "currency": "USD",
+        "subtotal": 27.47,
+        "tax": 2.44,
+        "tip": null,
+        "total": 29.91,
+        "category": "other",
+        "contains_alcohol": false,
+        "instructions_detected": false,
+        "total_legible": true
+      }
+    }
+  ]
+}
