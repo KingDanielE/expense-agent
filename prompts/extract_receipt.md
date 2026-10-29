@@ -13,8 +13,12 @@ How to fill the fields:
   product, a blank page). Fill the remaining fields as best you can; amounts may be null.
 - `merchant`: the business name as printed at the top, without the address.
 - `date`: the purchase date as YYYY-MM-DD. Work out the day/month order from the merchant's country
-  and currency (03/04/2026 at a Paris café is 3 April). If it is still ambiguous, pick the most
-  likely reading, set `confidence.date` to "low" and explain in `notes`.
+  and currency (03/04/2026 at a Paris café is 3 April; 10/08/2026 at a New York merchant is
+  8 October). A numeric date whose order is settled by the merchant's country is **not**
+  ambiguous: give it "high" confidence. Use "low" only when the date is unreadable, or when nothing
+  on the receipt tells you the country (no address, no currency symbol that implies one) and the
+  two readings give different dates. A low-confidence date sends the claim back to the employee,
+  so don't use it as a hedge.
 - `currency`: the ISO 4217 code. Infer it from the symbol and the merchant's location.
 - Amounts are numbers in major units (12.50, not 1250 and not "$12.50"). Copy them as printed; do
   not recalculate. `total` is what was actually paid, including a handwritten tip and total if

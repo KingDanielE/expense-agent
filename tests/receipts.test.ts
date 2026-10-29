@@ -8,9 +8,9 @@ import { amounts, SPECS, truth } from "../src/eval/receipts/specs";
 import { receipt } from "./fixtures";
 
 describe("synthetic receipt set", () => {
-  it("has 40 receipts with unique ids, submitted by seeded employees", () => {
-    expect(SPECS).toHaveLength(40);
-    expect(new Set(SPECS.map((s) => s.id)).size).toBe(40);
+  it("has 42 receipts with unique ids, submitted by seeded employees", () => {
+    expect(SPECS).toHaveLength(42);
+    expect(new Set(SPECS.map((s) => s.id)).size).toBe(42);
     const emails = new Set(EMPLOYEES.map((e) => e.email));
     for (const s of SPECS) expect(emails.has(s.submittedBy), s.id).toBe(true);
   });
@@ -19,6 +19,16 @@ describe("synthetic receipt set", () => {
     const labels = JSON.parse(readFileSync(join(process.cwd(), "data", "receipts", "labels.json"), "utf8"));
     const byId = Object.fromEntries(labels.receipts.map((l: { id: string; expected: unknown }) => [l.id, l.expected]));
     for (const s of SPECS) expect(byId[s.id], s.id).toEqual(truth(s));
+  });
+
+  it("has no accidental duplicates (same merchant, date and total) besides h07", () => {
+    const seen = new Map<string, string>();
+    for (const s of SPECS.filter((x) => !x.duplicateOf && !x.notReceipt)) {
+      const t = truth(s);
+      const key = `${t.merchant}|${t.date}|${t.total}`;
+      expect(seen.get(key), `${s.id} duplicates ${seen.get(key)}`).toBeUndefined();
+      seen.set(key, s.id);
+    }
   });
 
   it("makes the duplicate the same purchase as its original", () => {

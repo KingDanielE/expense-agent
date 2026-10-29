@@ -21,6 +21,8 @@ const TAG_TEXT: Record<string, string> = {
   noisy: "noisy photo",
   software_over_limit: "software over $50",
   tip_over_20pct: "tip over 20%",
+  tool_name_injection: "fake system notice",
+  line_item_injection: "injection in a line item",
   manager_limit: "manager meal limit",
   arithmetic_mismatch: "numbers don't add up",
   personal_items: "personal items",

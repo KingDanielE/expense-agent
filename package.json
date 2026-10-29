@@ -18,7 +18,8 @@
     "submit": "tsx scripts/submit.ts",
     "approve": "tsx scripts/approve.ts",
     "show": "tsx scripts/show-run.ts",
-    "worker": "tsx scripts/worker.ts"
+    "worker": "tsx scripts/worker.ts",
+    "eval": "tsx scripts/eval.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",

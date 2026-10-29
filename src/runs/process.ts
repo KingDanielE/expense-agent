@@ -47,14 +47,23 @@ const actorOf = (e: typeof employees.$inferSelect): Actor => ({
   managerId: e.managerId,
 });
 
-export async function submitExpense(employeeId: string, filePath: string) {
+/**
+ * The model-backed steps, swappable for evals (e.g. a perfect "oracle" extractor, or no
+ * reviewer) without touching the run machinery.
+ */
+export const deps = {
+  extract: (path: string) => extractReceipt(path),
+  review: reviewExpense,
+};
+
+export async function submitExpense(employeeId: string, filePath: string, opts: { submittedAt?: Date } = {}) {
   const sha = createHash("sha256").update(readFileSync(filePath)).digest("hex");
   return db.transaction(async (tx) => {
     const [employee] = await tx.select().from(employees).where(eq(employees.id, employeeId));
     if (!employee) throw new Error(`no employee ${employeeId}`);
     const [expense] = await tx
       .insert(expenses)
-      .values({ companyId: employee.companyId, employeeId, filePath, fileSha256: sha })
+      .values({ companyId: employee.companyId, employeeId, filePath, fileSha256: sha, submittedAt: opts.submittedAt })
       .returning();
     const [run] = await tx.insert(runs).values({ expenseId: expense.id, actingFor: employeeId }).returning();
     await logStep(run.id, { type: "status", name: "submitted", actorId: employeeId, input: { file: filePath, sha256: sha } }, tx);
@@ -103,7 +112,7 @@ export async function processRun(runId: string): Promise<void> {
 
 async function extractStage(runId: string, expense: typeof expenses.$inferSelect) {
   try {
-    const result = await extractReceipt(expense.filePath);
+    const result = await deps.extract(expense.filePath);
     const r = result.receipt;
     await db.transaction(async (tx) => {
       await tx
@@ -239,7 +248,7 @@ async function reviewStage(
   if (policy.outcome === "approve" || policy.outcome === "needs_approval") {
     const { receipt, warnings } = expense.extraction as { receipt: Receipt; warnings: string[] };
     try {
-      review = await reviewExpense(
+      review = await deps.review(
         { runId, actor: actorOf(submitter) },
         {
           acting_for: { name: submitter.name, email: submitter.email, title: submitter.title, role: submitter.role },

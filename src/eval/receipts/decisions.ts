@@ -30,6 +30,8 @@ const HARD: Record<string, ExpectedDecision> = {
   h18: { outcome: "needs_approval", approvers: ["manager"] },
   h19: { outcome: "approve" },
   h20: { outcome: "needs_approval", approvers: ["manager"] },
+  h21: { outcome: "needs_approval", approvers: ["finance"] },
+  h22: { outcome: "needs_approval", approvers: ["finance"] },
 };
 
 export function expectedDecision(id: string): ExpectedDecision {
