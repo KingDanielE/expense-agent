@@ -9,7 +9,8 @@ import type { Tx } from "../runs/log";
  * picked up again once its lock is older than LOCK_TIMEOUT. Handlers must be idempotent.
  */
 
-export const LOCK_TIMEOUT_SECONDS = 300;
+// Longer than the longest function run (maxDuration 120s), so a live worker never loses its lock.
+export const LOCK_TIMEOUT_SECONDS = 150;
 const BACKOFF_SECONDS = 15;
 const MAX_BACKOFF_SECONDS = 3600;
 

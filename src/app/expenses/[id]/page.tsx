@@ -38,9 +38,9 @@ export default async function ExpensePage({ params, searchParams }: Params) {
   const review = decision?.review && "summary_for_employee" in decision.review ? decision.review : null;
   const reviewFailed = decision?.review && "failed" in decision.review ? decision.review.failed : null;
   const busy = run?.status === "queued" || run?.status === "running";
-  // Self-healing on serverless: if a run has sat still for a while (its function was cut short),
-  // the next page view picks it up again. The queue's locks stop double processing.
-  if (busy && run && Date.now() - run.updatedAt.getTime() > 20_000) {
+  // On serverless there is no worker: viewing a queued run starts it, and a run that has sat
+  // still (its function was cut short) is picked up again. The queue's locks stop double work.
+  if (run && (run.status === "queued" || (run.status === "running" && Date.now() - run.updatedAt.getTime() > 20_000))) {
     const runId = run.id;
     after(() => workOnce(`run:${runId}`).catch((err) => console.error(err)));
   }
