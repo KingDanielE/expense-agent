@@ -9,6 +9,10 @@ often it gets things wrong, with false approvals counted separately because they
 Everything here is synthetic: a fictional company (Northwind Labs), fictional people and
 generated receipts.
 
+**Live demo: https://expense-agent-seven.vercel.app**: switch who you're "acting as" in the
+header, submit a test receipt (try h06, the prompt injection), then switch to Maya (Finance) to
+approve it. Test receipts only, 150 claims a day, resets nightly.
+
 ## Status
 
 | Phase | What | State |
