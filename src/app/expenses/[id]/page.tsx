@@ -74,7 +74,7 @@ export default async function ExpensePage({ params, searchParams }: Params) {
         <StatusPill status={expense.status} />
       </div>
       {error && <p className="notice">{error}</p>}
-      <AutoRefresh active={busy} />
+      <AutoRefresh active={busy} statusUrl={`/api/expenses/${expense.id}/status`} />
 
       <div className="grid-2">
         <div className="stack">
