@@ -3,6 +3,7 @@ import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { readFileSync } from "node:fs";
 import { extname, join } from "node:path";
 import { fallbackParams, getAnthropic } from "./llm";
+import { resolveFile } from "./paths";
 import { costUsd, type Usage } from "./pricing";
 import { consistencyWarnings, Receipt, ReceiptExtraction } from "./receipt";
 
@@ -58,7 +59,7 @@ function fileBlock(path: string): Anthropic.Beta.BetaContentBlockParam {
   const ext = extname(path).toLowerCase() as keyof typeof MEDIA_TYPES;
   const mediaType = MEDIA_TYPES[ext];
   if (!mediaType) throw new ExtractionError("unsupported_file", `unsupported file type: ${ext || path}`, 0);
-  const data = readFileSync(path).toString("base64");
+  const data = readFileSync(resolveFile(path)).toString("base64");
   if (mediaType === "application/pdf") {
     return { type: "document", source: { type: "base64", media_type: mediaType, data } };
   }

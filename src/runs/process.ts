@@ -8,6 +8,7 @@ import { db } from "../db";
 import { approvals, employees, type ExpenseStatus, expenses, runs } from "../db/schema";
 import { enqueue } from "../jobs/queue";
 import { ExtractionError, extractReceipt } from "../lib/extract";
+import { resolveFile } from "../lib/paths";
 import { usdPerUnit } from "../lib/fx";
 import { type Receipt, toMinor } from "../lib/receipt";
 import { evaluate, type Outcome, type PolicyDecision, type ReviewerFlag, withReviewerFlags } from "../policy/engine";
@@ -56,14 +57,25 @@ export const deps = {
   review: reviewExpense,
 };
 
-export async function submitExpense(employeeId: string, filePath: string, opts: { submittedAt?: Date } = {}) {
-  const sha = createHash("sha256").update(readFileSync(filePath)).digest("hex");
+export async function submitExpense(
+  employeeId: string,
+  filePath: string,
+  opts: { submittedAt?: Date; visitor?: string } = {},
+) {
+  const sha = createHash("sha256").update(readFileSync(resolveFile(filePath))).digest("hex");
   return db.transaction(async (tx) => {
     const [employee] = await tx.select().from(employees).where(eq(employees.id, employeeId));
     if (!employee) throw new Error(`no employee ${employeeId}`);
     const [expense] = await tx
       .insert(expenses)
-      .values({ companyId: employee.companyId, employeeId, filePath, fileSha256: sha, submittedAt: opts.submittedAt })
+      .values({
+        companyId: employee.companyId,
+        employeeId,
+        filePath,
+        fileSha256: sha,
+        submittedAt: opts.submittedAt,
+        visitor: opts.visitor,
+      })
       .returning();
     const [run] = await tx.insert(runs).values({ expenseId: expense.id, actingFor: employeeId }).returning();
     await logStep(run.id, { type: "status", name: "submitted", actorId: employeeId, input: { file: filePath, sha256: sha } }, tx);

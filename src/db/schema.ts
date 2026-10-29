@@ -87,8 +87,10 @@ export const expenses = pgTable(
     employeeId: uuid("employee_id")
       .notNull()
       .references(() => employees.id),
-    filePath: text("file_path").notNull(),
+    filePath: text("file_path").notNull(), // relative to the project root, or absolute (uploads)
     fileSha256: text("file_sha256").notNull(),
+    // Hash of the submitter's IP, for the public demo's per-visitor limit. Never the IP itself.
+    visitor: text("visitor"),
     status: expenseStatusEnum("status").notNull().default("submitted"),
     // Filled by the run: the validated Receipt, and the final decision (policy engine + review).
     extraction: jsonb("extraction"),

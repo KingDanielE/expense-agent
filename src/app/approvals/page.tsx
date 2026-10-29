@@ -5,6 +5,8 @@ import { listInbox } from "@/web/queries";
 import { getViewer } from "@/web/session";
 import { DecideForm } from "../_components/decide-form";
 
+export const maxDuration = 30;
+
 export default async function Approvals({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const { error } = await searchParams;
   const viewer = await getViewer();

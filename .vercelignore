@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+uploads
+out
+node_modules
+.next
+.claude

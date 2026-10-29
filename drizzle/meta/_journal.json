@@ -15,6 +15,13 @@
       "when": 1793274982631,
       "tag": "0001_right_jack_flag",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793280987499,
+      "tag": "0002_good_sharon_ventura",
+      "breakpoints": true
     }
   ]
 }

@@ -3,13 +3,17 @@ import { money, usd, when } from "@/web/format";
 import { listMyExpenses } from "@/web/queries";
 import { SAMPLES } from "@/web/samples";
 import { getViewer } from "@/web/session";
+import { DEMO, demoAllowance } from "@/web/demo";
 import { submitSample, submitUpload } from "./actions";
 import { AutoRefresh } from "./_components/auto-refresh";
 import { StatusPill } from "./_components/status";
 
+export const maxDuration = 60; // the submit action processes the claim in after()
+
 export default async function Home({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const { error } = await searchParams;
   const viewer = await getViewer();
+  const allowance = await demoAllowance();
   const mine = await listMyExpenses(viewer);
   const busy = mine.some((e) => e.status === "submitted" || e.status === "processing");
   const hard = SAMPLES.filter((s) => s.id.startsWith("h"));
@@ -70,13 +74,22 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ e
 
         <section className="card stack">
           <h2>Submit a receipt</h2>
-          <form action={submitUpload} className="stack">
-            <input type="file" name="receipt" accept=".png,.jpg,.jpeg,.webp,.pdf" required />
-            <button className="btn primary" type="submit">
-              Upload and submit
-            </button>
-          </form>
-          <p className="or">or try one of the test receipts</p>
+          {DEMO ? (
+            <p className="sample-hint">
+              Public demo: pick one of the test receipts below. Uploads are off, data resets daily
+              {allowance.leftToday != null && `, and ${allowance.leftToday} claims are left today`}.
+            </p>
+          ) : (
+            <>
+              <form action={submitUpload} className="stack">
+                <input type="file" name="receipt" accept=".png,.jpg,.jpeg,.webp,.pdf" required />
+                <button className="btn primary" type="submit">
+                  Upload and submit
+                </button>
+              </form>
+              <p className="or">or try one of the test receipts</p>
+            </>
+          )}
           <form action={submitSample} className="samples">
             <select name="sample" defaultValue="h06" aria-label="Test receipt">
               <optgroup label="Hard cases">
@@ -94,9 +107,10 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ e
                 ))}
               </optgroup>
             </select>
-            <button className="btn" type="submit">
+            <button className={`btn${DEMO ? " primary" : ""}`} type="submit" disabled={!allowance.allowed}>
               Submit as {viewer.name.split(" ")[0]}
             </button>
+            {!allowance.allowed && <p className="sample-hint">{allowance.reason}</p>}
             <p className="sample-hint">
               Rendered, synthetic receipts. Limits depend on who submits: managers get a higher meal limit.
             </p>
