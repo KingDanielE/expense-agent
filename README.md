@@ -17,8 +17,26 @@ generated receipts.
 | 1 | Receipt extraction (Claude vision → Zod-validated schema), 40 synthetic receipts, extraction grader | done |
 | 2 | Policy engine in code, permission-scoped reviewer tools | done |
 | 3 | Reviewer agent loop, durable runs on a Postgres job queue, approval chains with pause and resume | done |
-| 4 | UI: submit, approvals inbox, run log | next |
-| 5 | Decision evals: accuracy, false approvals, injection resistance, cost, latency | |
+| 4 | UI: submit, approvals inbox, run log, "acting as" switcher | done |
+| 5 | Decision evals: accuracy, false approvals, injection resistance, cost, latency | next |
+
+## The app
+
+`npm run dev` (with `EMBEDDED_WORKER=1`, the worker runs inside the Next.js server).
+
+- **Acting as**: a switcher in the header picks who you are (demo sign-in). Every page, action
+  and receipt image is permission-checked as that person.
+- **My expenses**: upload a receipt, or submit any of the 40 test receipts as the current person.
+  The page updates live while the agent works.
+- **Approvals**: the steps you're allowed to decide, with the receipt, the rule that needs you,
+  the reviewer's note for the approver, and the adjustments. Approve or reject with a comment.
+- **Expense page**: the outcome and the employee summary, the approval chain with who decided
+  and why, what the agent read, and the full run log: each model call with tokens, cost and
+  latency, each tool call with its ALLOWED / DENIED verdict, expandable inputs and outputs.
+
+Someone outside the claim (another team's manager, say) gets "You can't see this expense",
+and the receipt image returns 403. Images are served `no-store`: a cached copy would survive a
+switch of user on a shared browser, which the first version of this page got wrong.
 
 ## Results so far
 

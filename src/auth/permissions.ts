@@ -16,6 +16,11 @@ export type Check =
   | { action: "employee.read_compensation"; employee: Subject }
   | { action: "expense.list"; owner: Subject }
   | {
+      action: "expense.read";
+      owner: Subject;
+      approvals: { approverId: string | null; approverRole: Role | null; status: string }[];
+    }
+  | {
       action: "expense.decide";
       owner: Subject;
       approval: { approverId: string | null; approverRole: Role | null; status: string };
@@ -44,6 +49,17 @@ export function can(actor: Actor, check: Check): Verdict {
       if (manages) return allow("direct report's expenses");
       if (actor.role === "finance") return allow("Finance");
       return deny("expenses are visible only to the employee, their manager and Finance");
+    case "expense.read": {
+      if (self) return allow("own expense");
+      if (manages) return allow("direct report's expense");
+      if (actor.role === "finance") return allow("Finance");
+      // Approvers in the chain (named, or by role) can see the claim they're asked to decide.
+      const onChain = check.approvals.some(
+        (a) => a.status !== "waiting" && (a.approverId === actor.id || (!a.approverId && a.approverRole === actor.role)),
+      );
+      if (onChain) return allow("approver on this expense");
+      return deny("expenses are visible only to the employee, their manager, Finance and its approvers");
+    }
     case "expense.decide": {
       const a = check.approval;
       if (self) return deny("nobody approves their own expense");
