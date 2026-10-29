@@ -26,11 +26,11 @@ export async function actAs(formData: FormData) {
   redirect(safeBack(formData.get("back")));
 }
 
-/**
- * Starts processing once the response is sent. With a separate or embedded worker this is just
- * a head start; on serverless hosting (no long-running worker) it is how runs get processed.
- */
+/** Starts processing once the response is sent (a head start for a separate or embedded worker). */
 function processSoon(runId?: string) {
+  // On Vercel, work started after the response gets frozen part-way and keeps its job locked;
+  // there the expense page's status poll does the processing inside its own request instead.
+  if (process.env.VERCEL) return;
   after(async () => {
     try {
       if (runId) await workOnce(`run:${runId}`); // this visitor's claim first

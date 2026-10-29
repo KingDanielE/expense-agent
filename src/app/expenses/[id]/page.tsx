@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { after } from "next/server";
 import { can } from "@/auth/permissions";
-import { workOnce } from "@/jobs/worker";
 import type { Receipt } from "@/lib/receipt";
 import type { ExpenseDecision } from "@/runs/process";
 import { money, usd, when } from "@/web/format";
@@ -14,7 +12,6 @@ import { StatusPill } from "../../_components/status";
 
 type Params = { params: Promise<{ id: string }>; searchParams: Promise<{ error?: string }> };
 
-export const maxDuration = 120; // room for a run picked up in after()
 
 export default async function ExpensePage({ params, searchParams }: Params) {
   const [{ id }, { error }] = await Promise.all([params, searchParams]);
@@ -38,12 +35,8 @@ export default async function ExpensePage({ params, searchParams }: Params) {
   const review = decision?.review && "summary_for_employee" in decision.review ? decision.review : null;
   const reviewFailed = decision?.review && "failed" in decision.review ? decision.review.failed : null;
   const busy = run?.status === "queued" || run?.status === "running";
-  // On serverless there is no worker: viewing a queued run starts it, and a run that has sat
-  // still (its function was cut short) is picked up again. The queue's locks stop double work.
-  if (run && (run.status === "queued" || (run.status === "running" && Date.now() - run.updatedAt.getTime() > 20_000))) {
-    const runId = run.id;
-    after(() => workOnce(`run:${runId}`).catch((err) => console.error(err)));
-  }
+  // Matches what the status endpoint returns, which also does the processing (see its comment).
+  const fingerprint = JSON.stringify({ status: expense.status, run: run?.status ?? null, steps: steps.length });
   const canDecide =
     decidable &&
     can(viewer, {
@@ -74,7 +67,7 @@ export default async function ExpensePage({ params, searchParams }: Params) {
         <StatusPill status={expense.status} />
       </div>
       {error && <p className="notice">{error}</p>}
-      <AutoRefresh active={busy} statusUrl={`/api/expenses/${expense.id}/status`} />
+      <AutoRefresh active={busy} statusUrl={`/api/expenses/${expense.id}/status`} initial={fingerprint} />
 
       <div className="grid-2">
         <div className="stack">
