@@ -8,6 +8,13 @@
       "when": 1793204006147,
       "tag": "0000_deep_marten_broadcloak",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793274982631,
+      "tag": "0001_right_jack_flag",
+      "breakpoints": true
     }
   ]
 }

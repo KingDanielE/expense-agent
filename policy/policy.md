@@ -24,6 +24,8 @@ converted at the exchange rate on the receipt date.
 | Equipment (hardware) | — | — | Anything over $500 needs IT approval. |
 | Other | — | — | Always needs manager approval. |
 
+Amounts over the meal, lodging and office supply limits are not reimbursed; the rest is.
+
 ## Never reimbursed
 
 - Alcohol. Alcohol line items (and their share of tax and tip) are removed; the rest of the

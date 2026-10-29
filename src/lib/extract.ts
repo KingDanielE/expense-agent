@@ -2,15 +2,12 @@ import Anthropic from "@anthropic-ai/sdk";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { readFileSync } from "node:fs";
 import { extname, join } from "node:path";
+import { fallbackParams, getAnthropic } from "./llm";
 import { costUsd, type Usage } from "./pricing";
 import { consistencyWarnings, Receipt, ReceiptExtraction } from "./receipt";
 
 export const DEFAULT_MODEL = "claude-opus-5-5";
 const MAX_ATTEMPTS = 2;
-
-// Server-side refusal fallback ("default" routing) is supported on these models only.
-const FALLBACK_MODELS = new Set(["claude-fable-5-1", "claude-opus-5-5", "claude-opus-5", "claude-sonnet-5-5"]);
-const FALLBACK_BETA = "server-side-fallback-2026-07-01";
 
 const MEDIA_TYPES = {
   ".png": "image/png",
@@ -78,7 +75,7 @@ function fileBlock(path: string): Anthropic.Beta.BetaContentBlockParam {
  */
 export async function extractReceipt(path: string, opts: ExtractOptions = {}): Promise<ExtractResult> {
   const model = opts.model ?? process.env.EXTRACT_MODEL ?? DEFAULT_MODEL;
-  const client = opts.client ?? new Anthropic();
+  const client = opts.client ?? getAnthropic();
   const file = fileBlock(path);
   const started = Date.now();
   const usage: Usage = { inputTokens: 0, outputTokens: 0 };
@@ -98,7 +95,7 @@ export async function extractReceipt(path: string, opts: ExtractOptions = {}): P
         system: systemPrompt(),
         output_config: { format: betaZodOutputFormat(ReceiptExtraction), effort: opts.effort ?? "low" },
         messages: [{ role: "user", content: [file, { type: "text", text: instruction }] }],
-        ...(FALLBACK_MODELS.has(model) ? { betas: [FALLBACK_BETA], fallbacks: "default" as const } : {}),
+        ...fallbackParams(model),
       });
     } catch (err) {
       // API errors (auth, rate limits after SDK retries, 400s) are not ours to paper over.
