@@ -33,14 +33,20 @@ export async function enqueue(
     .onConflictDoNothing({ target: jobs.dedupeKey });
 }
 
-/** Claims the next due job (or one abandoned by a dead worker), or returns null. */
-export async function claim(): Promise<Job | null> {
+/**
+ * Claims the next due job (or one abandoned by a dead worker), or returns null. With
+ * `dedupeKey`, claims only that job: a request that just created work can do it first instead
+ * of picking up whatever older job is next.
+ */
+export async function claim(dedupeKey?: string): Promise<Job | null> {
+  const only = dedupeKey ? sql`AND dedupe_key = ${dedupeKey}` : sql``;
   const rows = await db.execute<Record<string, unknown>>(sql`
     UPDATE jobs SET status = 'running', locked_at = now(), attempts = attempts + 1
     WHERE id = (
       SELECT id FROM jobs
-      WHERE (status = 'queued' AND run_at <= now())
-         OR (status = 'running' AND locked_at < now() - make_interval(secs => ${LOCK_TIMEOUT_SECONDS}))
+      WHERE ((status = 'queued' AND run_at <= now())
+         OR (status = 'running' AND locked_at < now() - make_interval(secs => ${LOCK_TIMEOUT_SECONDS})))
+         ${only}
       ORDER BY run_at
       FOR UPDATE SKIP LOCKED
       LIMIT 1

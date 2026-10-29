@@ -4,7 +4,8 @@ import Anthropic from "@anthropic-ai/sdk";
 let client: Anthropic | undefined;
 
 export function getAnthropic(): Anthropic {
-  client ??= new Anthropic();
+  // A hung call must fail well inside a serverless function's time limit, so the job can retry.
+  client ??= new Anthropic({ timeout: 45_000, maxRetries: 2 });
   return client;
 }
 

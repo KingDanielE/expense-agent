@@ -6,7 +6,7 @@ import { extname, join } from "node:path";
 import { after } from "next/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { runUntilIdle } from "@/jobs/worker";
+import { runUntilIdle, workOnce } from "@/jobs/worker";
 import { decideApproval, PermissionDenied, submitExpense } from "@/runs/process";
 import { DEMO, demoAllowance, visitorId } from "@/web/demo";
 import { ACTOR_COOKIE, getViewer } from "@/web/session";
@@ -30,8 +30,15 @@ export async function actAs(formData: FormData) {
  * Starts processing once the response is sent. With a separate or embedded worker this is just
  * a head start; on serverless hosting (no long-running worker) it is how runs get processed.
  */
-function processSoon() {
-  after(() => runUntilIdle().catch((err) => console.error(err)));
+function processSoon(runId?: string) {
+  after(async () => {
+    try {
+      if (runId) await workOnce(`run:${runId}`); // this visitor's claim first
+      await runUntilIdle(5);
+    } catch (err) {
+      console.error(err);
+    }
+  });
 }
 
 export async function submitUpload(formData: FormData) {
@@ -48,8 +55,8 @@ export async function submitUpload(formData: FormData) {
   const path = join(dir, `${randomUUID()}${ext}`);
   writeFileSync(path, Buffer.from(await upload.arrayBuffer()));
 
-  const { expenseId } = await submitExpense(viewer.id, path);
-  processSoon();
+  const { expenseId, runId } = await submitExpense(viewer.id, path);
+  processSoon(runId);
   redirect(`/expenses/${expenseId}`);
 }
 
@@ -62,8 +69,8 @@ export async function submitSample(formData: FormData) {
   const allowance = await demoAllowance();
   if (!allowance.allowed) fail(allowance.reason);
 
-  const { expenseId } = await submitExpense(viewer.id, path, { visitor: DEMO ? await visitorId() : undefined });
-  processSoon();
+  const { expenseId, runId } = await submitExpense(viewer.id, path, { visitor: DEMO ? await visitorId() : undefined });
+  processSoon(runId);
   redirect(`/expenses/${expenseId}`);
 }
 

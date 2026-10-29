@@ -37,9 +37,9 @@ async function handle(job: Job) {
   }
 }
 
-/** Runs one job if one is due. Returns false when the queue is empty. */
-export async function workOnce(): Promise<boolean> {
-  const job = await claim();
+/** Runs one job if one is due (only the job with `dedupeKey`, if given). False when there was none. */
+export async function workOnce(dedupeKey?: string): Promise<boolean> {
+  const job = await claim(dedupeKey);
   if (!job) return false;
   await handle(job);
   return true;

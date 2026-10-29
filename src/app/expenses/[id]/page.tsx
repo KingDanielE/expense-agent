@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { after } from "next/server";
 import { can } from "@/auth/permissions";
-import { runUntilIdle } from "@/jobs/worker";
+import { workOnce } from "@/jobs/worker";
 import type { Receipt } from "@/lib/receipt";
 import type { ExpenseDecision } from "@/runs/process";
 import { money, usd, when } from "@/web/format";
@@ -14,7 +14,7 @@ import { StatusPill } from "../../_components/status";
 
 type Params = { params: Promise<{ id: string }>; searchParams: Promise<{ error?: string }> };
 
-export const maxDuration = 60; // room for a run picked up in after()
+export const maxDuration = 120; // room for a run picked up in after()
 
 export default async function ExpensePage({ params, searchParams }: Params) {
   const [{ id }, { error }] = await Promise.all([params, searchParams]);
@@ -41,7 +41,8 @@ export default async function ExpensePage({ params, searchParams }: Params) {
   // Self-healing on serverless: if a run has sat still for a while (its function was cut short),
   // the next page view picks it up again. The queue's locks stop double processing.
   if (busy && run && Date.now() - run.updatedAt.getTime() > 20_000) {
-    after(() => runUntilIdle().catch((err) => console.error(err)));
+    const runId = run.id;
+    after(() => workOnce(`run:${runId}`).catch((err) => console.error(err)));
   }
   const canDecide =
     decidable &&

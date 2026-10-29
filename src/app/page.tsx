@@ -8,7 +8,7 @@ import { submitSample, submitUpload } from "./actions";
 import { AutoRefresh } from "./_components/auto-refresh";
 import { StatusPill } from "./_components/status";
 
-export const maxDuration = 60; // the submit action processes the claim in after()
+export const maxDuration = 120; // the submit action processes the claim in after()
 
 export default async function Home({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
   const { error } = await searchParams;
