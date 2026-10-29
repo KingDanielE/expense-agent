@@ -40,7 +40,7 @@ export default async function ExpensePage({ params, searchParams }: Params) {
   const busy = run?.status === "queued" || run?.status === "running";
   // Self-healing on serverless: if a run has sat still for a while (its function was cut short),
   // the next page view picks it up again. The queue's locks stop double processing.
-  if (busy && run && Date.now() - run.updatedAt.getTime() > 45_000) {
+  if (busy && run && Date.now() - run.updatedAt.getTime() > 20_000) {
     after(() => runUntilIdle().catch((err) => console.error(err)));
   }
   const canDecide =

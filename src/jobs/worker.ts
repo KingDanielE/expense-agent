@@ -1,3 +1,4 @@
+import { logStep } from "../runs/log";
 import { failRun, processRun, resumeRun } from "../runs/process";
 import { claim, complete, fail, type Job } from "./queue";
 
@@ -24,6 +25,14 @@ async function handle(job: Job) {
   } catch (err) {
     const result = await fail(job, err);
     console.error(JSON.stringify({ job: job.id, kind: job.kind, attempt: job.attempts, result, error: String(err) }));
+    // Failures belong in the audit trail too, not just in server logs.
+    if (typeof payload.runId === "string" && result === "retry") {
+      await logStep(payload.runId, {
+        type: "status",
+        name: "retrying",
+        output: { attempt: job.attempts, of: job.maxAttempts, error: String(err).slice(0, 500) },
+      }).catch(() => {});
+    }
     if (result === "dead") await handler?.onDead?.(payload, String(err));
   }
 }
