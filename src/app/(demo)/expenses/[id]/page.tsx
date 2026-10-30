@@ -6,9 +6,9 @@ import type { ExpenseDecision } from "@/runs/process";
 import { money, usd, when } from "@/web/format";
 import { getExpenseView } from "@/web/queries";
 import { getViewer } from "@/web/session";
-import { AutoRefresh } from "../../_components/auto-refresh";
-import { DecideForm } from "../../_components/decide-form";
-import { StatusPill } from "../../_components/status";
+import { AutoRefresh } from "@/app/_components/auto-refresh";
+import { DecideForm } from "@/app/_components/decide-form";
+import { StatusPill } from "@/app/_components/status";
 
 type Params = { params: Promise<{ id: string }>; searchParams: Promise<{ error?: string }> };
 
@@ -23,7 +23,7 @@ export default async function ExpensePage({ params, searchParams }: Params) {
       <div className="card stack">
         <h1>You can&apos;t see this expense</h1>
         <p className="sub">Acting as {viewer.name}: {view.denied}.</p>
-        <Link href="/">Back to my expenses</Link>
+        <Link href="/demo">Back to my expenses</Link>
       </div>
     );
   }

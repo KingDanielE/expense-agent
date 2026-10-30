@@ -3,7 +3,7 @@ import type { ExpenseDecision } from "@/runs/process";
 import { money, usd, when } from "@/web/format";
 import { listInbox } from "@/web/queries";
 import { getViewer } from "@/web/session";
-import { DecideForm } from "../_components/decide-form";
+import { DecideForm } from "@/app/_components/decide-form";
 
 export const maxDuration = 30;
 

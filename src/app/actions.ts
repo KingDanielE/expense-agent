@@ -14,11 +14,11 @@ import { ACTOR_COOKIE, getViewer } from "@/web/session";
 const UPLOAD_TYPES = new Set([".png", ".jpg", ".jpeg", ".webp", ".pdf"]);
 
 function safeBack(value: FormDataEntryValue | null) {
-  const back = typeof value === "string" ? value : "/";
-  return back.startsWith("/") && !back.startsWith("//") ? back : "/";
+  const back = typeof value === "string" ? value : "/demo";
+  return back.startsWith("/") && !back.startsWith("//") ? back : "/demo";
 }
 
-const fail = (message: string): never => redirect(`/?error=${encodeURIComponent(message)}`);
+const fail = (message: string): never => redirect(`/demo?error=${encodeURIComponent(message)}`);
 
 export async function actAs(formData: FormData) {
   const id = String(formData.get("employeeId") ?? "");
