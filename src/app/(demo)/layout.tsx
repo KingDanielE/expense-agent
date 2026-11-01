@@ -15,9 +15,7 @@ export default async function DemoLayout({ children }: Readonly<{ children: Reac
       <header className="topbar">
         <div className="topbar-inner">
           <Link href="/" className="brand">
-            <span className="brand-mark" aria-hidden>
-              ◆
-            </span>
+            <span className="brand-mark" aria-hidden />
             Expense Agent
           </Link>
           <nav className="nav">

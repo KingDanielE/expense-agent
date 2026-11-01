@@ -65,26 +65,45 @@ const WARP = [
   ["Extend the permission model to agents", "the agent acts for a person, with that person's permissions"],
 ];
 
+// A faint field of currency characters behind the hero, in the spirit of warp.co's. Deterministic,
+// so the static page renders the same every time.
+function symbolField(rows: number, cols: number): string {
+  const glyphs = "$$0123456789.,%$ ";
+  let seed = 7;
+  const next = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+  return Array.from({ length: rows }, () =>
+    Array.from({ length: cols }, () => (next() < 0.55 ? " " : glyphs[Math.floor(next() * glyphs.length)])).join(" "),
+  ).join("\n");
+}
+const FIELD = symbolField(14, 70);
+
 export default function Landing() {
   return (
     <div className={s.wrap}>
       <header className={s.top}>
         <span className={s.brand}>
-          <span className={s.mark} aria-hidden>
-            ◆
-          </span>
+          <span className={s.mark} aria-hidden />
           Expense Agent
         </span>
         <nav className={s.topLinks}>
           <Link href="/demo">Live demo</Link>
           <a href={REPO}>Code</a>
-          <a href={CV}>CV</a>
+          <a className={s.topCta} href={CV}>
+            CV <span aria-hidden>›</span>
+          </a>
         </nav>
       </header>
 
       <section className={s.hero}>
-        <p className={s.eyebrow}>A project by Daniel Engelberg for Warp’s Applied AI Engineer role</p>
-        <h1 className={s.title}>An AI agent that reviews expenses the way a careful finance team would</h1>
+        <pre className={s.field} aria-hidden>
+          {FIELD}
+        </pre>
+        <p className={s.eyebrow}>
+          <span className={s.badge}>Project</span> by Daniel Engelberg for Warp’s Applied AI Engineer role
+        </p>
+        <h1 className={s.title}>
+          An AI agent that reviews expenses <span className={s.hot}>the way a careful finance team would</span>
+        </h1>
         <p className={s.lead}>
           It reads the receipt, applies the company’s written policy in code, and approves it, adjusts it,
           or asks the right person. It acts with the permissions of whoever it works for, and every step
@@ -92,10 +111,10 @@ export default function Landing() {
         </p>
         <div className={s.ctas}>
           <Link className={`${s.btn} ${s.primary}`} href="/demo">
-            Try the live demo
+            Try the live demo <span aria-hidden>→</span>
           </Link>
-          <a className={s.btn} href={CV}>
-            Download my CV (PDF)
+          <a className={`${s.btn} ${s.dark}`} href={CV}>
+            Download my CV
           </a>
           <a className={s.btn} href={REPO}>
             Read the code
@@ -153,7 +172,7 @@ export default function Landing() {
         </ol>
       </section>
 
-      <section className={s.section}>
+      <section className={`${s.section} ${s.band}`}>
         <h2>Decision evals</h2>
         <p className={s.sectionLead}>
           Each receipt runs through the real pipeline as its submitter, and is graded on the outcome{" "}
@@ -234,7 +253,7 @@ export default function Landing() {
         </p>
         <div className={s.ctas}>
           <a className={`${s.btn} ${s.primary}`} href={CV}>
-            Download my CV (PDF)
+            Download my CV (PDF) <span aria-hidden>→</span>
           </a>
           <a className={s.btn} href="mailto:danielengelberg131@gmail.com">
             danielengelberg131@gmail.com
@@ -246,7 +265,11 @@ export default function Landing() {
       </section>
 
       <footer className={s.footer}>
-        Built with TypeScript, Next.js, PostgreSQL and the Claude API. Deployed on Vercel and Neon.
+        <p>Built with TypeScript, Next.js, PostgreSQL and the Claude API. Deployed on Vercel and Neon.</p>
+        <p>
+          Styled after warp.co for this application by Daniel Engelberg. Not affiliated with or endorsed by
+          Warp.
+        </p>
       </footer>
     </div>
   );

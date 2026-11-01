@@ -1,44 +1,57 @@
+/* Palette and shapes follow warp.co: near-monochrome warm greys, one orange signal colour
+   (#FF3E02, used for fills and large type; --accent-ink is a darker orange for small text so it
+   stays readable), dark text on orange buttons, hairline borders, 9–12px radii. */
 :root {
-  --bg: #f6f7f9;
+  --bg: #ffffff;
   --surface: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --border: #e2e8f0;
-  --accent: #4f46e5;
-  --accent-text: #ffffff;
-  --accent-soft: #eef2ff;
-  --ok: #047857;
-  --ok-soft: #ecfdf5;
-  --warn: #b45309;
-  --warn-soft: #fffbeb;
-  --bad: #b91c1c;
-  --bad-soft: #fef2f2;
-  --info: #1d4ed8;
-  --info-soft: #eff6ff;
-  --code: #f1f5f9;
-  --radius: 10px;
-  --mono: ui-monospace, "Cascadia Code", Consolas, monospace;
+  --subtle: #fafaf9;
+  --text: #202020;
+  --muted: #63635e;
+  --faint: #838383;
+  --border: #e8e8e8;
+  --accent: #ff3e02;
+  --accent-ink: #c43200;
+  --accent-text: #202020;
+  --accent-soft: #fff1eb;
+  --ink: #202020;
+  --ink-text: #ffffff;
+  --ok: #007a00;
+  --ok-soft: #ebf6ec;
+  --warn: #9a5a00;
+  --warn-soft: #fdf4e3;
+  --bad: #c4231c;
+  --bad-soft: #fdeeed;
+  --info: #3a5bb8;
+  --info-soft: #eef2fb;
+  --code: #f3f3f1;
+  --radius: 12px;
+  --sans: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: var(--font-geist-mono), ui-monospace, "Cascadia Code", Consolas, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0b1120;
-    --surface: #111827;
-    --text: #e5e7eb;
-    --muted: #94a3b8;
-    --border: #1f2937;
-    --accent: #818cf8;
-    --accent-text: #0b1120;
-    --accent-soft: #1e1b4b;
-    --ok: #34d399;
-    --ok-soft: #052e22;
-    --warn: #fbbf24;
-    --warn-soft: #2a1d05;
-    --bad: #f87171;
-    --bad-soft: #2b0b0b;
-    --info: #93c5fd;
-    --info-soft: #0b1d3a;
-    --code: #0f172a;
+    --bg: #0a0a0a;
+    --surface: #111110;
+    --subtle: #161615;
+    --text: #ededeb;
+    --muted: #a3a39d;
+    --faint: #82827c;
+    --border: #262626;
+    --accent-ink: #ff7a4d;
+    --accent-text: #0a0a0a;
+    --accent-soft: #2a1307;
+    --ink: #ededeb;
+    --ink-text: #0a0a0a;
+    --ok: #4cc38a;
+    --ok-soft: #0c2417;
+    --warn: #f0b44a;
+    --warn-soft: #2a1f08;
+    --bad: #ff6b61;
+    --bad-soft: #2c0f0d;
+    --info: #8fa8ff;
+    --info-soft: #121a33;
+    --code: #1c1c1b;
   }
 }
 
@@ -51,22 +64,29 @@
 body {
   color: var(--text);
   background: var(--bg);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--sans);
   font-size: 15px;
   line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
 a {
-  color: var(--accent);
+  color: var(--accent-ink);
   text-decoration: none;
 }
 a:hover {
   text-decoration: underline;
 }
 
+h1,
+h2,
+h3 {
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
 h1 {
-  font-size: 24px;
-  line-height: 1.25;
+  font-size: 26px;
+  line-height: 1.2;
 }
 h2 {
   font-size: 17px;
@@ -101,7 +121,8 @@ pre {
   gap: 8px 24px;
 }
 .brand {
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--text);
   display: flex;
   align-items: center;
@@ -111,7 +132,10 @@ pre {
   text-decoration: none;
 }
 .brand-mark {
-  color: var(--accent);
+  width: 13px;
+  height: 13px;
+  border-radius: 4px;
+  background: var(--accent);
 }
 .nav {
   display: flex;
@@ -205,7 +229,7 @@ textarea {
   color: var(--text);
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 9px;
   padding: 7px 10px;
   width: 100%;
 }
@@ -219,21 +243,28 @@ textarea {
 
 .btn {
   font: inherit;
-  font-weight: 600;
+  font-weight: 500;
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--text);
-  border-radius: 8px;
-  padding: 7px 14px;
+  border-radius: 9px;
+  padding: 8px 15px;
   cursor: pointer;
 }
 .btn:hover {
-  border-color: var(--muted);
+  border-color: var(--faint);
 }
 .btn.primary {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--accent-text);
+}
+.btn.primary:hover {
+  filter: brightness(1.05);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 .btn.danger {
   color: var(--bad);
@@ -254,7 +285,7 @@ textarea {
   padding: 2px 10px;
   border-radius: 999px;
   font-size: 12.5px;
-  font-weight: 600;
+  font-weight: 500;
   white-space: nowrap;
   background: var(--code);
   color: var(--muted);
@@ -278,7 +309,7 @@ textarea {
 .s-processing,
 .s-submitted {
   background: var(--accent-soft);
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .notice {
@@ -292,7 +323,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 500;
   margin-bottom: 16px;
 }
@@ -327,8 +358,8 @@ td {
 }
 th {
   font-size: 12.5px;
-  font-weight: 600;
-  color: var(--muted);
+  font-weight: 500;
+  color: var(--faint);
 }
 tr:last-child td {
   border-bottom: none;
@@ -380,8 +411,9 @@ tr:last-child td {
   font-variant-numeric: tabular-nums;
 }
 .big {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
 }
 .lines {
@@ -399,8 +431,10 @@ tr:last-child td {
   white-space: nowrap;
 }
 .summary {
-  background: var(--accent-soft);
-  border-radius: 8px;
+  background: var(--subtle);
+  border: 1px solid var(--border);
+  border-inline-start: 3px solid var(--accent);
+  border-radius: 9px;
   padding: 12px 14px;
 }
 
@@ -466,7 +500,7 @@ tr:last-child td {
 .t-model_call,
 .t-extract {
   background: var(--accent-soft);
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 .t-tool_call {
   background: var(--info-soft);
